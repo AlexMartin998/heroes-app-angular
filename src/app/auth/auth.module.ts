@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { MaterialModule } from '../material/material.module';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
@@ -13,6 +14,6 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     RegisterPageComponent,
     AuthLayoutComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule],
+  imports: [AuthRoutingModule, CommonModule, MaterialModule],
 })
 export class AuthModule {}
