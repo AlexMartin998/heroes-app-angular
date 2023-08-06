@@ -10,7 +10,7 @@ import { HeroesService } from '../../services/heroes.service';
   templateUrl: './search-page.component.html',
 })
 export class SearchPageComponent {
-  public searchInput = new FormControl(''); // reactive form
+  public searchInput = new FormControl(''); // reactive form <- input reactivo
   public heroes: Hero[] = [];
   public selectedHero?: Hero;
 
