@@ -1,3 +1,39 @@
-<h1>HeroesLayout</h1>
+<mat-sidenav-container fullscreen>
+  <!-- sidebar -->
+  <mat-sidenav #sidenav [ngStyle]="{ width: '250px' }">
+    <mat-toolbar>
+      <span>Manu</span>
+      <span class="spacer">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </span>
+    </mat-toolbar>
 
-<router-outlet></router-outlet>
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let item of sidebarItems"
+        [routerLink]="item.url"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon> {{ item.label }}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- navbar -->
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-button>Log Out</button>
+  </mat-toolbar>
+
+  <!-- other pages -->
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
