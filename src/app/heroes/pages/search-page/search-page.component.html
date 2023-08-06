@@ -1,1 +1,35 @@
-<p>search-page works!</p>
+<div class="flex flex-column p-3">
+  <h3>Searcher</h3>
+
+  <mat-form-field>
+    <mat-label>Searcher</mat-label>
+    <!-- formularios reactivos nos evita W con la caja de bananas [()] q es el 2 way data binding -->
+    <input
+      matInput
+      type="text"
+      name="search"
+      id="search"
+      [formControl]="searchInput"
+      (input)="searchHero()"
+      [matAutocomplete]="auto"
+    />
+
+    <!-- AutoComplet: `#auto` ref al input - HTML element al q adjudicarse -->
+    <mat-autocomplete
+      autoActiveFirstOption
+      #auto="matAutocomplete"
+      (optionSelected)="onSelectedOption($event)"
+    >
+      <mat-option *ngFor="let hero of heroes" [value]="hero">
+        {{ hero.superhero }}
+      </mat-option>
+
+      <!-- message nathing found -->
+      <mat-option *ngIf="!heroes.length && searchInput.value" value="">
+        Nothing to show with term '{{ searchInput.value }}'
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <pre>{{ selectedHero | json }}</pre>
+</div>

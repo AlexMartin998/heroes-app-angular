@@ -23,4 +23,11 @@ export class HeroesService {
       catchError((err) => of(undefined))
     );
   }
+
+  // // Autocomplete
+  getSuggestions(query: string): Observable<Hero[]> {
+    return this.http
+      .get<Hero[]>(`${this.baseUrl}/heroes?q=${query}&_limit=6`)
+      .pipe();
+  }
 }
