@@ -17,7 +17,7 @@ export class HeroesService {
     return this.http.get<Hero[]>(`${this.baseUrl}/heroes`);
   }
 
-  getHeroById(hero: Hero): Observable<Hero | undefined> {
+  findOne(hero: Hero): Observable<Hero | undefined> {
     return this.http.get<Hero>(`${this.baseUrl}/heroes/${hero}`).pipe(
       // debo retoranr 1 Observable, x eso el of() | podriamos manejarlo de varias formas
       catchError((err) => of(undefined))

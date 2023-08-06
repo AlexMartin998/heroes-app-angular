@@ -23,7 +23,7 @@ export class HeroPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         // cambia lo q emite el Observable original (params) - retorna new Observable
-        switchMap(({ id }) => this.heroesService.getHeroById(id))
+        switchMap(({ id }) => this.heroesService.findOne(id))
       )
       .subscribe((hero) => { // recibe lo q retorna el switchMap
         if (!hero) return this.router.navigateByUrl('/heroes/list');
