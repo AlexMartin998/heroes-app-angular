@@ -1,1 +1,64 @@
-<p>new-page works!</p>
+<h1>Edit / Create hero <span>Superman</span></h1>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+  <!-- form -->
+  <div class="col-12 sm:col-6">
+    <mat-card>
+      <mat-card-content>
+        <div class="grid">
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Super heroes</mat-label>
+            <input matInput type="text" required />
+          </mat-form-field>
+
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Alter Ego</mat-label>
+            <input matInput type="text" required />
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>First appearance</mat-label>
+            <input
+              type="text"
+              matInput
+              required
+              formControlName="first_appearance"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="col-12">
+            <mat-label>Characters</mat-label>
+            <input type="text" matInput required formControlName="characters" />
+          </mat-form-field>
+
+          <!-- selector -->
+          <mat-form-field>
+            <mat-label>Owner</mat-label>
+            <mat-select required>
+              <mat-option
+                *ngFor="let publisher of publishers"
+                [value]="publisher.id"
+              >
+                {{ publisher.desc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex justify-content-between">
+          <button mat-flat-button color="warn">Delete</button>
+          <button mat-flat-button color="primary">Save</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- image -->
+  <div class="col-12 sm:col-6">
+    <mat-card>
+      <img src="" alt="Hero Image" mat-card-image />
+    </mat-card>
+  </div>
+</div>
