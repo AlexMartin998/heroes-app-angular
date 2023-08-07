@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 import { uuidv4 } from 'src/app/shared/helpers';
 import { environments } from 'src/environments/environments';
@@ -30,5 +30,18 @@ export class AuthService {
   logout(): void {
     this.user = undefined;
     localStorage.clear();
+  }
+
+  checkAuth(): Observable<boolean> {
+    if (!localStorage.getItem('token')) return of(false);
+    const token = localStorage.getItem('token');
+
+    // NO es real esta verificacion
+    return this.http.get<User>(`${this.baseUrl}/users/1`).pipe(
+      // cada efecto 2rio haga algo especifico (1 sola cosa)
+      tap((user) => (this.user = user)),
+      map((user) => !!user?.id), // asegurarse q es un bool true
+      catchError((err) => of(false))
+    );
   }
 }
