@@ -1,4 +1,7 @@
-<h1>Edit / Create hero <span>Superman</span></h1>
+<h1>
+  {{ currentHero.id ? "Edit" : "Create" }} Hero
+  <span *ngIf="currentHero.id">{{ currentHero.superhero }}</span>
+</h1>
 
 <mat-divider class="mb-2"></mat-divider>
 
@@ -53,7 +56,14 @@
         </form>
 
         <div class="flex justify-content-between">
-          <button mat-flat-button color="warn">Delete</button>
+          <button *ngIf="currentHero.id" mat-flat-button color="warn">
+            Delete
+          </button>
+
+          <!-- para el flex -->
+          <span></span>
+
+          <!-- onSubmit 'cause it is outside the form -->
           <button mat-flat-button color="primary" (click)="onSubmit()">
             Save
           </button>
