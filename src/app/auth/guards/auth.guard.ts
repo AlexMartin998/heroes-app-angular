@@ -27,7 +27,7 @@ const checkAuthStatus = (): boolean | Observable<boolean> => {
 };
 
 // se ejecuta la verificacion con cada ruta q haga match
-export const canMatchGuard: CanMatchFn = (
+export const canMatchAuthGuard: CanMatchFn = (
   route: Route,
   segments: UrlSegment[]
 ) => {
@@ -38,7 +38,7 @@ export const canMatchGuard: CanMatchFn = (
 };
 
 // se ejecuta 1 unica vez
-export const canActivateGuard: CanActivateFn = (
+export const canActivateAuthGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
