@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { HeroesRoutingModule } from './heroes-routing.module';
 
-import { CardComponent } from './componets/card/card.component';
+import { CardComponent } from './components/card/card.component';
 import { HeroLayoutComponent } from './layouts/hero-layout/hero-layout.component';
 import { HeroPageComponent } from './pages/hero-page/hero-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
@@ -13,6 +13,7 @@ import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 import { HeroImagePipe } from './pipes/hero-image.pipe';
+import { ConfirmDialagComponent } from './components/confirm-dialag/confirm-dialag.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeroImagePipe } from './pipes/hero-image.pipe';
     HeroLayoutComponent,
     CardComponent,
     HeroImagePipe,
+    ConfirmDialagComponent,
   ],
   imports: [
     CommonModule,

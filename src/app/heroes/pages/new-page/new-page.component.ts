@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 
 import { Hero, Publisher } from '../../interfaces';
 import { HeroesService } from '../../services/heroes.service';
+import { ConfirmDialagComponent } from '../../components/confirm-dialag/confirm-dialag.component';
 
 @Component({
   selector: 'heroes-new-page',
@@ -31,9 +33,12 @@ export class NewPageComponent implements OnInit {
 
   constructor(
     private readonly heroesService: HeroesService,
+
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private readonly snackbar: MatSnackBar
+
+    private readonly snackbar: MatSnackBar,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +76,32 @@ export class NewPageComponent implements OnInit {
       this.showSnackbar(`${hero.superhero} updated`);
       this.router.navigate(['/heroes/edit', hero.id]);
     });
+  }
+
+  onDeleteHero() {
+    if (!this.currentHero.id) throw Error('Hero is required');
+
+    const dialogRef = this.dialog.open(ConfirmDialagComponent, {
+      data: this.heroForm.value,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((result: boolean) => result), // solo pasa si es true
+        switchMap(() => this.heroesService.delete(this.currentHero.id)), // delete it
+        filter((wasDeleted: boolean) => wasDeleted) // resp del deleted
+      )
+      .subscribe(() => this.router.navigateByUrl('/heroes/list')); // llega solo si wasDeleted
+
+    /* without filters
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+
+      this.heroesService.delete(this.currentHero.id).subscribe((wasDeleted) => {
+        if (wasDeleted) this.router.navigateByUrl('/heroes/list');
+      });
+    }); */
   }
 
   private showSnackbar(message: string): void {
